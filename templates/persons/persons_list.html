@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} 个人列表 - CRMS {% endblock title %}
+
+{% block content %}
+	<ol class="breadcrumb">
+		<li><a href="#">首页</a></li>
+		<li><a href="{% url 'crms:telcode_list' %}">个人</a></li>
+	</ol>
+	<div class="page-header">
+		<h2>个人列表</h2>
+	</div>
+
+	<div class="page-btn">
+		<div class="col-md-10">
+
+		</div>
+		<div class="col-md-2">
+			<a type="button" class="btn btn-success" href="{% url 'persons:person_add' %}"><i class="fa fa-plus-circle" aria-hidden="true"></i> 新增记录</a>
+		</div>
+	</div> <!--/.表头内容-->
+	<div class="page-tb">
+		<table class="table table-hover table-bordered">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>姓名</th>
+				<th>Code</th>
+				<th>alpha3</th>
+				<th>numeric</th>
+				<th>国家名称</th>
+				<th>国家国旗</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for item in person_obj %}
+				<tr>
+					<th scope="row">{{ item.id }}</th>
+					<td>{{ item.name }}</td>
+					<td>{{ item.country.code }}</td>
+					<td>{{ item.country.alpha3 }}</td>
+					<td>{{ item.country.numeric }}</td>
+					<td>{{ item.country.name }}</td>
+					<td><img src="{{ item.country.flag }}"></td>
+					<td>
+						<a href="{% url 'persons:person_edit' item.id %}"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+						<a href="{% url 'persons:person_del' item.id %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+					</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td colspan="4">无相关记录！</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div> <!--/.表格-->
+
+{% endblock content %}

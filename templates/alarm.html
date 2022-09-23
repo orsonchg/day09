@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} 警告信息 {% endblock title %}
+
+{% block css %} {% endblock css %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+	<div class="alert alert-danger" role="alert">
+		<strong>慎重!</strong> 你确定删除吗？
+	</div>
+
+	<div>
+		<a type="button" class="btn btn-danger" href="{{ cancel }}">取 消</a>
+		<button type="submit" class="btn btn-primary">确 认</button>
+	</div>
+</form>
+
+{% endblock content %}
+
+{% block js %} {% endblock js %}

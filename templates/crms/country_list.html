@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} 国家列表 - CRMS {% endblock title %}
+
+{% block content %}
+	<ol class="breadcrumb">
+		<li><a href="#">首页</a></li>
+		<li><a href="{% url 'crms:country_list' %}">国家</a></li>
+		<li class="active">列表</li>
+	</ol>
+	<div class="page-header">
+		<h2>国家列表</h2>
+	</div>
+
+	<div class="page-btn">
+		<div class="col-md-10">
+
+		</div>
+		<div class="col-md-2">
+			<a type="button" class="btn btn-success" href="{% url 'crms:country_add' %}"><i class="fa fa-plus-circle" aria-hidden="true"></i> 新增记录</a>
+		</div>
+	</div> <!--/.表头内容-->
+	<div class="page-tb">
+		<table class="table table-hover table-bordered">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>国家编号</th>
+				<th>国家中文简称</th>
+				<th>国家英文简称</th>
+				<th>国家中文名称</th>
+				<th>国家英文名称</th>
+				<th>域名</th>
+				<th>所属洲别</th>
+				<th>关联</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for item in country_obj %}
+				<tr>
+					<th scope="row">{{ item.id }}</th>
+					<td>{{ item.code }}</td>
+					<td>{{ item.cn_abbr }}</td>
+					<td>{{ item.en_abbr }}</td>
+					<td>{{ item.cn_name }}</td>
+					<td>{{ item.en_name }}</td>
+					<td>{{ item.domain }}</td>
+					<td>{{ item.continent }}</td>
+					<td>
+						<a href="{% url 'crms:telcode_list' %}">区号</a>
+						<a href="#">港口</a>
+						<a href="#">机场</a>
+					</td>
+					<td>
+						<a href="{% url 'crms:country_edit' item.id %}"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+						<a href="{% url 'crms:country_del' item.id %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+					</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td colspan="10">无相关记录！</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div> <!--/.表格-->
+
+{% endblock content %}

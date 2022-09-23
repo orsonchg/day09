@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} 洲别列表 - CRMS {% endblock title %}
+
+{% block content %}
+	<ol class="breadcrumb">
+		<li><a href="#">首页</a></li>
+		<li><a href="{% url 'crms:continent_list' %}">洲别</a></li>
+		<li class="active">列表</li>
+	</ol>
+	<div class="page-header">
+		<h2>洲别列表</h2>
+	</div>
+
+	<div class="page-btn">
+		<div class="col-md-10">
+
+		</div>
+		<div class="col-md-2">
+			<a type="button" class="btn btn-success" href="{% url 'crms:continent_add' %}"><i class="fa fa-plus-circle" aria-hidden="true"></i> 新增记录</a>
+		</div>
+	</div> <!--/.表头内容-->
+	<div class="page-tb">
+		<table class="table table-hover table-bordered">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>洲别名称</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for item in continent_obj %}
+				<tr>
+					<th scope="row">{{ item.id }}</th>
+					<td>{{ item.name }}</td>
+					<td>{{ item.remark }}</td>
+					<td>
+						<a href="{% url 'crms:continent_edit' item.id %}"><i class="fa fa-file-text" aria-hidden="true"></i> </a>
+						 <a href="{% url 'crms:continent_del' item.id %}"> <i class="fa fa-trash-o" aria-hidden="true"></i> </a>
+					</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td colspan="4">无相关记录！</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div> <!--/.表格-->
+
+{% endblock content %}

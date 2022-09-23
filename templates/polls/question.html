@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} 新增 - 投票系统 {% endblock title %}
+
+{% block content %}
+	<ol class="breadcrumb">
+		<li><a href="#">首页</a></li>
+		<li><a href="{% url 'polls:index' %}">投票系统</a></li>
+		<li class="active">新增</li>
+	</ol>
+	<div class="page-header">
+		<h2>投票新增</h2>
+	</div>
+
+	<form method="post" novalidate>
+		{% csrf_token %}
+		{% for item in form %}
+		<div class="form-group">
+			<label for="{{ item.id_for_label }}" class="col-sm-2 control-label">{{ item.label }}</label>
+			<div class="col-sm-8">
+				{{ item }}
+				<span class="error-message">{{ item.errors }}</span>
+			</div>
+		</div>
+		{% endfor %}
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">确认</button>
+			</div>
+		</div>
+
+	</form>
+
+
+{% endblock %}

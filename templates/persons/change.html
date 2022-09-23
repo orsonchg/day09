@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} 操作管理 - CRMS {% endblock title %}
+
+{% block content %}
+
+	<div class="page-tb">
+		<form class="form-horizontal" method="post" novalidate>
+			{% csrf_token %}
+			{% for field in form %}
+			<div class="form-group">
+				<label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
+				<div class="col-sm-8">
+					{{ field }}
+					<span class="error-message">{{ field.errors.0 }}</span>
+				</div>
+			</div>
+			{% endfor %}
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">确 认</button>
+				</div>
+			</div>
+		</form>
+
+	</div> <!--/.表格-->
+
+{% endblock content %}
